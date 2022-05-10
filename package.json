@@ -84,5 +84,8 @@
     "commitizen": {
       "path": "./node_modules/cz-changelog"
     }
+  },
+  "engines": {
+    "node": "16.15.0"
   }
 }
