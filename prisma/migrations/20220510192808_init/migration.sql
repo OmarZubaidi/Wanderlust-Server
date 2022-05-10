@@ -63,7 +63,7 @@ CREATE TABLE "Event" (
     "bookingLink" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "pictures" TEXT NOT NULL,
-    "rating" INTEGER NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL,
     "tripId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
