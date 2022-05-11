@@ -54,9 +54,22 @@ DATABASE_URL=postgresql://user:password@localhost:5432/wanderlust?schema=public
 AUTH0_ISSUER_URL=https://tenant-name.region.auth0.com/
 # Auth0 Custom Api Identifier 
 AUTH0_AUDIENCE=https://yourapiidentifier.com
-#Signing Algorithm RS256
 ```
 
+## Setup Heroku
+
+```bash
+# Prisma and Heroku setup from scratch
+# https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-heroku
+
+# add remote heroku repo
+heroku git:remote -a your-app-name
+# push changes to heroku remote server
+# this will run npm start and npx prisma migrate deploy to set up the db
+git push heroku main
+# to see live logs of the server run 
+heroku log --tail
+```
 ## Routes
 
 Following routes are available for the web and mobile application.
@@ -65,19 +78,19 @@ Following routes are available for the web and mobile application.
 
 Routes:
 
-```bash
-# find all users
+```javascript
+// find all users
 GET /users
-# find user by id
-# includes Hotels, Flights, UsersOnTrips
+// find user by id
+// includes Hotels, Flights, Trips
 GET /users/:id
-# find user by email
+// find user by email
 GET /users/email/:email
-# create new user -> look at CreateUserDto below for example
+// create new user -> look at CreateUserDto below for example
 POST /users
-# update user -> look at CreateUserDto for updatable properties
+// update user -> look at CreateUserDto for updatable properties
 PATCH /users/:id
-# delete user
+// delete user
 DELETE /users/:id
 ```
 
@@ -99,16 +112,16 @@ CreateUserDto:
 
 Routes:
 
-```bash
-# find all hotels
+```javascript
+// find all hotels
 GET /hotels
-# find hotel by id
+// find hotel by id
 GET /hotels/:id
-# create new hotel-> look at CreateHotelDto below for example
+// create new hotel-> look at CreateHotelDto below for example
 POST /hotels
-# update hotel -> look at CreateHotelDto for updatable properties
+// update hotel -> look at CreateHotelDto for updatable properties
 PATCH /hotels/:id
-# delete hotel
+// delete hotel
 DELETE /hotels/:id
 ```
 
@@ -134,16 +147,16 @@ CreateHotelDto:
 
 Routes:
 
-```bash
-# find all flights
+```javascript
+// find all flights
 GET /flights
-# find flight by id
+// find flight by id
 GET /flights/:id
-# create new flight -> look at CreateFlightDto below for example
+// create new flight -> look at CreateFlightDto below for example
 POST /flights
-# update flights -> look at CreateFlightDto below for updatable properties
+// update flights -> look at CreateFlightDto below for updatable properties
 PATCH /flights/:id
-# Delete flight
+// Delete flight
 DELETE /flights/:id
 ```
 
@@ -169,16 +182,16 @@ CreateFlightDto:
 
 Routes:
 
-```bash
-# find all events
+```javascript
+// find all events
 GET /events
-# find event by id
+// find event by id
 GET /events/:id
-# create new flight -> look at CreateEventDto below for example
+// create new flight -> look at CreateEventDto below for example
 POST /events
-# update flights -> look at CreateEventDto below for updatable properties
+// update flights -> look at CreateEventDto below for updatable properties
 PATCH /events/:id
-# Delete event
+// Delete event
 DELETE /events/:id
 ```
 
@@ -204,22 +217,52 @@ CreateEventDto:
 }
 ```
 
+### Trip
+
+Routes:
+
+```javascript
+// find all trips
+GET /trips
+// find trip by id, 
+// includes Hotels, Flights, Events, and Users
+GET /trips/:id
+// create new trip-> look at CreateUsersOnTripDto below for example
+POST /trips
+// update trip-> look at CreateUsersOnTripDto below for updatable properties
+PATCH /trips/:id
+// Delete trip
+DELETE /trips/:id
+```
+
+Data Transfer Objects:
+
+```json
+CreateTripDto:
+{
+    "start": "1970-01-01T00:00:00.000Z",
+    "end": "1970-01-01T00:00:00.000Z",
+    "destination": "Senegal"
+}
+```
+
+
 ### UsersOnTrips (m - n Bridge)
 
 Routes:
 
-```bash
-# find all UsersOnTrips
+```javascript
+// find all UsersOnTrips
 GET /users-on-trips
-# find UsersOnTrips by id
+// find UsersOnTrips by id
 GET /users-on-trips/:id
-# create new UsersOnTrips -> look at CreateUsersOnTripDto below for example
+// create new UsersOnTrips -> look at CreateUsersOnTripDto below for example
 POST /users-on-trips
-# create many trips with single tripId and multiple userIds
+// create many trips with single tripId and multiple userIds
 POST /users-on-trips/many
-# update UsersOnTrips -> look at CreateUsersOnTripDto below for updatable properties
+// update UsersOnTrips -> look at CreateUsersOnTripDto below for updatable properties
 PATCH /users-on-trips/:id
-# Delete UsersOnTrips
+// Delete UsersOnTrips
 DELETE /users-on-trips/:id
 ```
 
@@ -243,31 +286,62 @@ CreateManyUsersOnTripDto:
 }
 ```
 
-### Trip
+### UsersOnHotels (m - n Bridge)
 
 Routes:
 
-```bash
-# find all trips
-GET /trips
-# find trip by id, 
-# includes Hotels, Flights, Events, UsersOnTrips
-GET /trips/:id
-# create new trip-> look at CreateUsersOnTripDto below for example
-POST /trips
-# update trip-> look at CreateUsersOnTripDto below for updatable properties
-PATCH /trips/:id
-# Delete trip
-DELETE /trips/:id
+```javascript
+// find all UsersOnHotels
+GET /users-on-hotels
+// find UsersOnHotels by id
+GET /users-on-hotels/:id
+// create new UsersOnHotels -> look at CreateUsersOnHotelsDto below for example
+POST /users-on-hotels
+// create many trips with single tripId and multiple userIds
+POST /users-on-hotels/many
+// update UsersOnHotels -> look at CreateUsersOnHotelsDto below for updatable properties
+PATCH /users-on-hotels/:id
+// Delete UsersOnHotels
+DELETE /users-on-hotels/:id
 ```
 
 Data Transfer Objects:
 
 ```json
-CreateTripDto:
+CreateUsersOnHotelsDto:
 {
-    "start": "1970-01-01T00:00:00.000Z",
-    "end": "1970-01-01T00:00:00.000Z",
-    "destination": "Senegal"
+    "userId": 10,
+    "tripId": 2,
+    "hotelId": 2
+}
+```
+
+### UsersOnFlights (m - n Bridge)
+
+Routes:
+
+```javascript
+// find all UsersOnFlights
+GET /users-on-flights
+// find UsersOnFlights by id
+GET /users-on-flights/:id
+// create new UsersOnFlights -> look at CreateUsersOnFlightsDto below for example
+POST /users-on-flights
+// create many trips with single tripId and multiple userIds
+POST /users-on-flights/many
+// update UsersOnFlights -> look at CreateUsersOnFlightsDto below for updatable properties
+PATCH /users-on-flights/:id
+// Delete UsersOnFlights
+DELETE /users-on-flights/:id
+```
+
+Data Transfer Objects:
+
+```json
+CreateUsersOnHotelsDto:
+{
+    "userId": 10,
+    "tripId": 2,
+    "flightId": 2
 }
 ```
