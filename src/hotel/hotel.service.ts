@@ -1,7 +1,5 @@
 import {
   ForbiddenException,
-  HttpException,
-  HttpStatus,
   Injectable,
   NotAcceptableException,
   NotFoundException,
@@ -26,8 +24,6 @@ export class HotelService {
       nights,
       priceTotal,
       hotelApiId,
-      userId,
-      tripId,
     } = createHotelDto;
 
     try {
@@ -41,8 +37,6 @@ export class HotelService {
           nights,
           priceTotal,
           hotelApiId,
-          userId,
-          tripId,
         },
       });
       return created;
@@ -95,8 +89,6 @@ export class HotelService {
       nights,
       priceTotal,
       hotelApiId,
-      userId,
-      tripId,
     } = updateHotelDto;
 
     try {
@@ -113,8 +105,6 @@ export class HotelService {
           nights,
           priceTotal,
           hotelApiId,
-          userId,
-          tripId,
         },
       });
       return updated;

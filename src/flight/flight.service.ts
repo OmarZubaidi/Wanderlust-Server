@@ -27,8 +27,6 @@ export class FlightService {
         lengthOfFlight,
         price,
         flightApiId,
-        userId,
-        tripId,
       } = createFlightDto;
       const flight = await this.prisma.flight.create({
         data: {
@@ -40,8 +38,6 @@ export class FlightService {
           lengthOfFlight,
           price,
           flightApiId,
-          userId,
-          tripId,
         },
       });
       return flight;
@@ -94,8 +90,6 @@ export class FlightService {
       lengthOfFlight,
       price,
       flightApiId,
-      userId,
-      tripId,
     } = updateFlightDto;
 
     try {
@@ -112,8 +106,6 @@ export class FlightService {
           lengthOfFlight,
           price,
           flightApiId,
-          userId,
-          tripId,
         },
       });
       return updated;

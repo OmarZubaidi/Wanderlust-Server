@@ -12,6 +12,8 @@ import { EventModule } from './event/event.module';
 import { UsersOnTripsModule } from './users-on-trips/users-on-trips.module';
 import { TripModule } from './trip/trip.module';
 import { AuthzModule } from './authz/authz.module';
+import { UsersOnHotelsModule } from './users-on-hotels/users-on-hotels.module';
+import { UsersOnFlightModule } from './users-on-flights/users-on-flights.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { AuthzModule } from './authz/authz.module';
     UsersOnTripsModule,
     TripModule,
     AuthzModule,
+    UsersOnHotelsModule,
+    UsersOnFlightModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],
