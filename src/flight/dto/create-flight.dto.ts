@@ -17,8 +17,4 @@ export class CreateFlightDto {
   price: string;
   @IsNumber()
   flightApiId: number;
-  @IsNumber()
-  userId: number;
-  @IsNumber()
-  tripId: number;
 }

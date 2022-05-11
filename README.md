@@ -138,8 +138,6 @@ CreateHotelDto:
     "nights": 5,
     "priceTotal": "303 €",
     "hotelApiId": 142,
-    "userId": 14,
-    "tripId": 1
 }
 ```
 
@@ -173,8 +171,6 @@ CreateFlightDto:
     "lengthOfFlight": "2:30 h",
     "price": "230 €",
     "flightApiId": 1234,
-    "userId": 16,
-    "tripId": 2,
 }:
 ```
 
