@@ -11,38 +11,35 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  email         String         @unique
-  username      String
-  sub           String         @unique
-  emailVerified Boolean
-  pictureUrl    String
-  origin        String?
-  Hotels        Hotel[]
-  Flights       Flight[]
-  UsersOnTrips  UsersOnTrips[]
-  createdAt     DateTime       @default(now())
+  id             Int              @id @default(autoincrement())
+  email          String           @unique
+  username       String
+  sub            String           @unique
+  emailVerified  Boolean
+  pictureUrl     String
+  origin         String?
+  UsersOnTrips   UsersOnTrips[]
+  UsersOnHotels  UsersOnHotels[]
+  UsersOnFlights UsersOnFlights[]
+  createdAt      DateTime         @default(now())
 }
 
 model Hotel {
-  id          Int      @id @default(autoincrement())
-  name        String
-  location    String
-  coordinates String
-  arrival     DateTime
-  departure   DateTime
-  nights      Int
-  priceTotal  String
-  hotelApiId  Int      @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId      Int
-  trip        Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  tripId      Int
-  createdAt   DateTime @default(now())
+  id            Int             @id @default(autoincrement())
+  name          String
+  location      String
+  coordinates   String
+  arrival       DateTime
+  departure     DateTime
+  nights        Int
+  priceTotal    String
+  hotelApiId    Int
+  createdAt     DateTime        @default(now())
+  UsersOnHotels UsersOnHotels[]
 }
 
 model Flight {
-  id             Int      @id @default(autoincrement())
+  id             Int              @id @default(autoincrement())
   departure      DateTime
   arrival        DateTime
   gate           String
@@ -50,12 +47,9 @@ model Flight {
   arrAirport     String
   lengthOfFlight String
   price          String
-  flightApiId    Int      @unique
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId         Int
-  trip           Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  tripId         Int
-  createdAt      DateTime @default(now())
+  flightApiId    Int
+  createdAt      DateTime         @default(now())
+  UsersOnFlights UsersOnFlights[]
 }
 
 model Event {
@@ -79,21 +73,43 @@ model Event {
 }
 
 model Trip {
-  id           Int            @id @default(autoincrement())
-  start        DateTime
-  end          DateTime
-  destination  String
-  Hotels       Hotel[]
-  Flights      Flight[]
-  Events       Event[]
-  UsersOnTrips UsersOnTrips[]
-  createdAt    DateTime       @default(now())
+  id             Int              @id @default(autoincrement())
+  start          DateTime
+  end            DateTime
+  destination    String
+  Events         Event[]
+  UsersOnTrips   UsersOnTrips[]
+  createdAt      DateTime         @default(now())
+  UsersOnHotels  UsersOnHotels[]
+  UsersOnFlights UsersOnFlights[]
 }
 
 model UsersOnTrips {
   id        Int      @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId    Int
+  trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tripId    Int
+  createdAt DateTime @default(now())
+}
+
+model UsersOnHotels {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    Int
+  hotel     Hotel    @relation(fields: [hotelId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  hotelId   Int
+  trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tripId    Int
+  createdAt DateTime @default(now())
+}
+
+model UsersOnFlights {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    Int
+  flight    Flight   @relation(fields: [flightId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  flightId  Int
   trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   tripId    Int
   createdAt DateTime @default(now())
