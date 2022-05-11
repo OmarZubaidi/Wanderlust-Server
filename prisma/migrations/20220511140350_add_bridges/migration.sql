@@ -23,8 +23,6 @@ CREATE TABLE "Hotel" (
     "nights" INTEGER NOT NULL,
     "priceTotal" TEXT NOT NULL,
     "hotelApiId" INTEGER NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "tripId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Hotel_pkey" PRIMARY KEY ("id")
@@ -41,8 +39,6 @@ CREATE TABLE "Flight" (
     "lengthOfFlight" TEXT NOT NULL,
     "price" TEXT NOT NULL,
     "flightApiId" INTEGER NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "tripId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Flight_pkey" PRIMARY KEY ("id")
@@ -91,6 +87,28 @@ CREATE TABLE "UsersOnTrips" (
     CONSTRAINT "UsersOnTrips_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "UsersOnHotels" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "hotelId" INTEGER NOT NULL,
+    "tripId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "UsersOnHotels_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UsersOnFlights" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "flightId" INTEGER NOT NULL,
+    "tripId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "UsersOnFlights_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -98,25 +116,7 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_sub_key" ON "User"("sub");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Hotel_hotelApiId_key" ON "Hotel"("hotelApiId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Flight_flightApiId_key" ON "Flight"("flightApiId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Event_eventApiId_key" ON "Event"("eventApiId");
-
--- AddForeignKey
-ALTER TABLE "Hotel" ADD CONSTRAINT "Hotel_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Hotel" ADD CONSTRAINT "Hotel_tripId_fkey" FOREIGN KEY ("tripId") REFERENCES "Trip"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Flight" ADD CONSTRAINT "Flight_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Flight" ADD CONSTRAINT "Flight_tripId_fkey" FOREIGN KEY ("tripId") REFERENCES "Trip"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_tripId_fkey" FOREIGN KEY ("tripId") REFERENCES "Trip"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -126,3 +126,21 @@ ALTER TABLE "UsersOnTrips" ADD CONSTRAINT "UsersOnTrips_userId_fkey" FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE "UsersOnTrips" ADD CONSTRAINT "UsersOnTrips_tripId_fkey" FOREIGN KEY ("tripId") REFERENCES "Trip"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UsersOnHotels" ADD CONSTRAINT "UsersOnHotels_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UsersOnHotels" ADD CONSTRAINT "UsersOnHotels_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UsersOnHotels" ADD CONSTRAINT "UsersOnHotels_tripId_fkey" FOREIGN KEY ("tripId") REFERENCES "Trip"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UsersOnFlights" ADD CONSTRAINT "UsersOnFlights_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UsersOnFlights" ADD CONSTRAINT "UsersOnFlights_flightId_fkey" FOREIGN KEY ("flightId") REFERENCES "Flight"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UsersOnFlights" ADD CONSTRAINT "UsersOnFlights_tripId_fkey" FOREIGN KEY ("tripId") REFERENCES "Trip"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -1,3 +1,6 @@
+import { User } from 'src/user/interface/User';
+import { UsersOnFlights } from 'src/users-on-flights/interface/UsersOnFlights';
+
 export interface Flight {
   id: number;
   departure: Date;
@@ -8,7 +11,7 @@ export interface Flight {
   lengthOfFlight: string;
   price: string;
   flightApiId: number;
-  userId: number;
-  tripId: number;
+  UsersOnFlights?: UsersOnFlights[];
+  Users?: User[];
   createdAt: Date;
 }

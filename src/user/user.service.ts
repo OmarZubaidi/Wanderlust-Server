@@ -5,7 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { Flight } from 'src/flight/interface/Flight';
+import { Hotel } from 'src/hotel/interface/Hotel';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Trip } from 'src/trip/interface/Trip';
 import { CreateUserDto } from './dtos/create-user-dto';
 import { UpdateUserDto } from './dtos/update-user-dto';
 import { User } from './interface/User';
@@ -27,18 +30,74 @@ export class UserService {
 
   async findById(id: string): Promise<User> {
     try {
-      const user = await this.prisma.user.findUnique({
+      const user: User = await this.prisma.user.findUnique({
         where: {
           id: +id,
         },
         include: {
-          Hotels: true,
-          Flights: true,
           UsersOnTrips: true,
+          UsersOnHotels: true,
+          UsersOnFlights: true,
         },
       });
+
       // return 404 if no user was found
       if (!user) throw new NotFoundException();
+
+      // convert promises to single promise by using Promise.all() and then awaiting result
+      const allTrips: Trip[] = await Promise.all(
+        // find trip data for each trip in the UsersOnTrips
+        user.UsersOnTrips.map(async (user) => {
+          return await this.prisma.trip.findUnique({
+            where: {
+              id: user.tripId,
+            },
+            select: {
+              id: true,
+              destination: true,
+              start: true,
+              end: true,
+              createdAt: true,
+            },
+          });
+        }),
+      );
+
+      // convert promises to single promise by using Promise.all() and then awaiting result
+      const allHotels: Hotel[] = await Promise.all(
+        // find trip data for each trip in the UsersOnHotels
+        user.UsersOnHotels.map(async (user) => {
+          return await this.prisma.hotel.findUnique({
+            where: {
+              id: user.hotelId,
+            },
+          });
+        }),
+      );
+
+      // convert promises to single promise by using Promise.all() and then awaiting result
+      const allFlights: Flight[] = await Promise.all(
+        // find trip data for each trip in the UsersOnHotels
+        user.UsersOnFlights.map(async (user) => {
+          return await this.prisma.flight.findUnique({
+            where: {
+              id: user.flightId,
+            },
+          });
+        }),
+      );
+
+      // add trips to the user
+      user.Trips = allTrips;
+      // add hotels to the user
+      user.Hotels = allHotels;
+      // add hotels to the user
+      user.Flights = allFlights;
+      // remove bridge tables
+      delete user.UsersOnTrips;
+      delete user.UsersOnHotels;
+      delete user.UsersOnFlights;
+      // return changed user
       return user;
     } catch (error) {
       return error;
