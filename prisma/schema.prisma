@@ -41,16 +41,14 @@ model Hotel {
 
 model Flight {
   id             Int              @id @default(autoincrement())
-  departure      DateTime
-  arrival        DateTime
-  gate           String
-  depAirport     String
-  arrAirport     String
   lengthOfFlight String
   price          String
+  departureCity  String
+  arrivalCity    String
   flightApiId    Int
   createdAt      DateTime         @default(now())
   UsersOnFlights UsersOnFlights[]
+  itineraries    String
 }
 
 model Event {
