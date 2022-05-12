@@ -13,6 +13,10 @@ import { CreateUserDto } from './dtos/create-user-dto';
 import { UpdateUserDto } from './dtos/update-user-dto';
 import { User } from './interface/User';
 
+import * as bcrypt from 'bcrypt';
+import { LoginMobileUserDto } from './dtos/login-mobile-user';
+const saltRounds = process.env.BCRYPT_SALT;
+
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
@@ -120,18 +124,71 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const {
+      email,
+      username,
+      sub,
+      emailVerified,
+      pictureUrl,
+      origin,
+      mobilePassword,
+    } = createUserDto;
+
     try {
+      let hash: string;
+      if (mobilePassword) {
+        hash = await bcrypt.hash(mobilePassword, +saltRounds);
+      }
+
       const user = await this.prisma.user.create({
         data: {
-          email: createUserDto.email,
-          username: createUserDto.username,
-          sub: createUserDto.sub,
-          emailVerified: createUserDto.emailVerified,
-          pictureUrl: createUserDto.pictureUrl,
-          origin: createUserDto.origin,
+          email,
+          username,
+          sub,
+          emailVerified,
+          pictureUrl,
+          origin,
+          mobilePassword: hash,
         },
       });
+
+      // delete password before returning
+      delete user.mobilePassword;
+
       return user;
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        // if hotel exists, error P2002
+        if (error.code === 'P2002') {
+          throw new ForbiddenException('Credentials taken');
+        } else {
+          throw new NotAcceptableException('Error:' + error);
+        }
+      }
+      throw new NotAcceptableException('Error:' + error);
+    }
+  }
+
+  async loginMobileUser(loginMobileUserDto: LoginMobileUserDto): Promise<User> {
+    const { email, mobilePassword } = loginMobileUserDto;
+    try {
+      // get user from db
+      const user = await this.prisma.user.findUnique({
+        where: {
+          email,
+        },
+      });
+
+      // compare user password to hash
+      const isMatch = await bcrypt.compare(mobilePassword, user.mobilePassword);
+      delete user.mobilePassword;
+
+      // if match return user else return error
+      if (isMatch) {
+        return user;
+      } else {
+        throw new ForbiddenException('Email or password are wrong!');
+      }
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         // if hotel exists, error P2002
@@ -159,10 +216,23 @@ export class UserService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    const { email, username, sub, emailVerified, pictureUrl, origin } =
-      updateUserDto;
+    const {
+      email,
+      username,
+      sub,
+      emailVerified,
+      pictureUrl,
+      origin,
+      mobilePassword,
+    } = updateUserDto;
+
     try {
-      const updated = this.prisma.user.update({
+      let hash: string;
+      if (mobilePassword) {
+        hash = await bcrypt.hash(mobilePassword, +saltRounds);
+      }
+
+      const updated = await this.prisma.user.update({
         where: {
           id: +id,
         },
@@ -173,8 +243,13 @@ export class UserService {
           emailVerified,
           pictureUrl,
           origin,
+          mobilePassword: hash,
         },
       });
+
+      // delete password before returning
+      delete updated.mobilePassword;
+
       return updated;
     } catch (error) {
       return error;

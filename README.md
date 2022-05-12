@@ -88,6 +88,8 @@ GET /users/:id
 GET /users/email/:email
 // create new user -> look at CreateUserDto below for example
 POST /users
+// login mobile users with bcrypt password -> look at LoginMobileUserDto
+POST /users/login/mobile
 // update user -> look at CreateUserDto for updatable properties
 PATCH /users/:id
 // delete user
@@ -105,6 +107,12 @@ CreateUserDto:
     "emailVerified": false,
     "pictureUrl": "urltoimage",
     "origin": "milano", // optional
+    "mobilePassword": "password" // optional
+}
+LoginMobileUserDto:
+{
+    "email": "test@test.at",
+    "mobilePassword": "password"
 }
 ```
 

@@ -18,6 +18,7 @@ model User {
   emailVerified  Boolean
   pictureUrl     String
   origin         String?
+  mobilePassword String?
   UsersOnTrips   UsersOnTrips[]
   UsersOnHotels  UsersOnHotels[]
   UsersOnFlights UsersOnFlights[]

@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from './dtos/create-user-dto';
+import { LoginMobileUserDto } from './dtos/login-mobile-user';
 import { UpdateUserDto } from './dtos/update-user-dto';
 import { UserService } from './user.service';
 
@@ -37,6 +38,11 @@ export class UserController {
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+
+  @Post('/login/mobile')
+  loginMobileUser(@Body() loginMobileUserDto: LoginMobileUserDto) {
+    return this.userService.loginMobileUser(loginMobileUserDto);
   }
 
   // TODO: Add for important routes
