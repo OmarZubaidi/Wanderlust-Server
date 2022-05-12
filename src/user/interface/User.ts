@@ -12,6 +12,7 @@ export interface User {
   sub: string;
   emailVerified: boolean;
   pictureUrl: string;
+  mobilePassword?: string;
   origin?: string;
   createdAt: Date;
   Hotels?: Hotel[];
