@@ -171,14 +171,21 @@ Data Transfer Objects:
 ```json
 CreateFlightDto:
 {
-    "departure": "1970-01-01T00:00:00.000Z",
-    "arrival": "1970-01-01T00:00:00.000Z",
-    "gate": "B",
-    "depAirport": "Barcelona",
-    "arrAirport": "Berlin",
+
+    "departureCity": "Barcelona",
+    "arrivalCity": "Berlin",
     "lengthOfFlight": "2:30 h",
     "price": "230 €",
-    "flightApiId": 1234,
+    "itineraries": [ // array of flight objects
+        {
+            "depAirport": "Barcelona",
+            "arrAirport": "Athen",
+            "depTerminal": "C", // optional
+            "arrTerminal": "G", // optional
+            "departure": "2022-05-12T13:06:11.358Z",
+            "arrival": "2022-05-12T13:06:11.358Z"
+        }
+    ]
 }:
 ```
 

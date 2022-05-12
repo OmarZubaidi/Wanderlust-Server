@@ -1,7 +1,5 @@
 import {
   ForbiddenException,
-  HttpException,
-  HttpStatus,
   Injectable,
   NotAcceptableException,
   NotFoundException,
@@ -19,25 +17,22 @@ export class FlightService {
   async create(createFlightDto: CreateFlightDto): Promise<Flight> {
     try {
       const {
-        departure,
-        arrival,
-        gate,
-        depAirport,
-        arrAirport,
         lengthOfFlight,
         price,
+        departureCity,
+        arrivalCity,
         flightApiId,
+        itineraries,
       } = createFlightDto;
+
       const flight = await this.prisma.flight.create({
         data: {
-          departure,
-          arrival,
-          gate,
-          depAirport,
-          arrAirport,
           lengthOfFlight,
           price,
+          departureCity,
+          arrivalCity,
           flightApiId,
+          itineraries: JSON.stringify(itineraries),
         },
       });
       return flight;
@@ -82,14 +77,12 @@ export class FlightService {
 
   async update(id: string, updateFlightDto: UpdateFlightDto): Promise<Flight> {
     const {
-      departure,
-      arrival,
-      gate,
-      depAirport,
-      arrAirport,
       lengthOfFlight,
       price,
+      departureCity,
+      arrivalCity,
       flightApiId,
+      itineraries,
     } = updateFlightDto;
 
     try {
@@ -98,14 +91,12 @@ export class FlightService {
           id: +id,
         },
         data: {
-          departure,
-          arrival,
-          gate,
-          depAirport,
-          arrAirport,
           lengthOfFlight,
           price,
+          departureCity,
+          arrivalCity,
           flightApiId,
+          itineraries: JSON.stringify(itineraries),
         },
       });
       return updated;
