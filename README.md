@@ -70,6 +70,12 @@ git push heroku main
 # to see live logs of the server run 
 heroku log --tail
 ```
+## API URL
+
+```bash
+https://api-wanderlust-dogs.herokuapp.com/
+```
+
 ## Routes
 
 Following routes are available for the web and mobile application.
@@ -125,6 +131,8 @@ Routes:
 GET /hotels
 // find hotel by id
 GET /hotels/:id
+// find hotel by apiId
+GET /hotels/api/:apiId
 // create new hotel-> look at CreateHotelDto below for example
 POST /hotels
 // update hotel -> look at CreateHotelDto for updatable properties
@@ -158,6 +166,8 @@ Routes:
 GET /flights
 // find flight by id
 GET /flights/:id
+// find flight by apiId
+GET /flights/api/:apiId
 // create new flight -> look at CreateFlightDto below for example
 POST /flights
 // update flights -> look at CreateFlightDto below for updatable properties
