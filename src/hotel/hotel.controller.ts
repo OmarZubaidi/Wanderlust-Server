@@ -35,6 +35,11 @@ export class HotelController {
     return this.hotelService.update(id, updateHotelDto);
   }
 
+  @Get('/api/:apiId')
+  findByApiId(@Param('apiId') apiId: string) {
+    return this.hotelService.findByApiId(apiId);
+  }
+
   @Delete(':id')
   deleteById(@Param('id') id: string) {
     return this.hotelService.deleteById(id);

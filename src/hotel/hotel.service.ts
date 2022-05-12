@@ -79,6 +79,29 @@ export class HotelService {
     }
   }
 
+  async findByApiId(apiId: string): Promise<Hotel[]> {
+    try {
+      const hotel = await this.prisma.hotel.findMany({
+        where: {
+          hotelApiId: +apiId,
+        },
+        include: {
+          UsersOnHotels: {
+            select: {
+              hotelId: true,
+              tripId: true,
+            },
+          },
+        },
+      });
+      // return 404 if no hotel was found
+      if (!hotel) throw new NotFoundException();
+      return hotel;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async update(id: string, updateHotelDto: UpdateHotelDto) {
     const {
       name,

@@ -30,6 +30,11 @@ export class FlightController {
     return this.flightService.findById(id);
   }
 
+  @Get('/api/:apiId')
+  findByApiId(@Param('apiId') apiId: string) {
+    return this.flightService.findByApiId(apiId);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFlightDto: UpdateFlightDto) {
     return this.flightService.update(id, updateFlightDto);

@@ -66,6 +66,37 @@ export class FlightService {
         where: {
           id: +id,
         },
+        include: {
+          UsersOnFlights: {
+            select: {
+              flightId: true,
+              tripId: true,
+            },
+          },
+        },
+      });
+      // return 404 if no flight was found
+      if (!flight) throw new NotFoundException();
+      return flight;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async findByApiId(apiId: string): Promise<Flight[]> {
+    try {
+      const flight = await this.prisma.flight.findMany({
+        where: {
+          flightApiId: +apiId,
+        },
+        include: {
+          UsersOnFlights: {
+            select: {
+              flightId: true,
+              tripId: true,
+            },
+          },
+        },
       });
       // return 404 if no flight was found
       if (!flight) throw new NotFoundException();
