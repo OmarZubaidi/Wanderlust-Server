@@ -14,4 +14,7 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   origin: string;
+  @IsString()
+  @IsOptional()
+  mobilePassword: string;
 }
