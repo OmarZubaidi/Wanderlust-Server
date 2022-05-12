@@ -47,6 +47,12 @@ export class TripService {
       const trips = await this.prisma.trip.findMany();
       // return 404 if no trips were found
       if (!trips) throw new NotFoundException();
+
+      // sort trips by start date
+      trips.sort((a, b) =>
+        a.start < b.start ? -1 : a.start > b.start ? 1 : 0,
+      );
+
       return trips;
     } catch (error) {
       return error;
