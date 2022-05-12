@@ -1,7 +1,7 @@
 export interface UsersOnHotels {
-  id: number;
-  userId: number;
+  id?: number;
+  userId?: number;
   hotelId: number;
   tripId: number;
-  createdAt: Date;
+  createdAt?: Date;
 }
