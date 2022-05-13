@@ -5,12 +5,16 @@ export interface Hotel {
   id: number;
   name: string;
   location: string;
-  coordinates: string;
+  longitude: number;
+  latitude: number;
   arrival: Date;
   departure: Date;
   nights: number;
   priceTotal: string;
   hotelApiId: number;
+  description: string;
+  rating: string;
+  type: string;
   createdAt: Date;
   UsersOnHotels?: UsersOnHotels[];
   Users?: User[];

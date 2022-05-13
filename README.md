@@ -43,6 +43,7 @@ npx prisma migrate dev --name init
 # open db web view
 npx prisma studio
 ```
+
 ## Setup Environmental Variables
 
 ```bash
@@ -67,9 +68,10 @@ heroku git:remote -a your-app-name
 # push changes to heroku remote server
 # this will run npm start and npx prisma migrate deploy to set up the db
 git push heroku main
-# to see live logs of the server run 
+# to see live logs of the server run
 heroku log --tail
 ```
+
 ## API URL
 
 ```bash
@@ -148,12 +150,16 @@ CreateHotelDto:
 {
     "name": "Teds Plaza",
     "location": "Austria",
-    "coordinates": "123, 5678",
+    "longitude": 12378,
+    "latitude": 1235678,
     "arrival": "2032-05-09T14:15:18.532Z",
     "departure": "2022-05-09T14:15:18.532Z",
     "nights": 5,
     "priceTotal": "303 €",
     "hotelApiId": 142,
+    "description": "Hotel is located near the beach",
+    "type": "hotel",
+    "rating": "5",
 }
 ```
 
@@ -227,7 +233,8 @@ CreateEventDto:
     "allDay": true,
     "description": "test",
     "location": "barcelona",
-    "coordinates": "123123123",
+    "longitude": 12378,
+    "latitude": 1235678,
     "price": "free",
     "eventApiId": 12323,
     "bookingLink": "LINK",
@@ -245,7 +252,7 @@ Routes:
 ```javascript
 // find all trips
 GET /trips
-// find trip by id, 
+// find trip by id,
 // includes Hotels, Flights, Events, and Users
 GET /trips/:id
 // create new trip-> look at CreateUsersOnTripDto below for example
@@ -266,7 +273,6 @@ CreateTripDto:
     "destination": "Senegal"
 }
 ```
-
 
 ### UsersOnTrips (m - n Bridge)
 

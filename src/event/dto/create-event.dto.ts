@@ -13,6 +13,10 @@ export class CreateEventDto {
   description: string;
   @IsString()
   location: string;
+  @IsNumber()
+  longitude: number;
+  @IsNumber()
+  latitude: number;
   @IsString()
   coordinates: string;
   @IsString()
