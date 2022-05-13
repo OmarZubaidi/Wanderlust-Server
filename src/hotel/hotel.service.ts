@@ -18,12 +18,16 @@ export class HotelService {
     const {
       name,
       location,
-      coordinates,
+      longitude,
+      latitude,
       arrival,
       departure,
       nights,
       priceTotal,
       hotelApiId,
+      description,
+      rating,
+      type,
     } = createHotelDto;
 
     try {
@@ -31,12 +35,16 @@ export class HotelService {
         data: {
           name,
           location,
-          coordinates,
+          longitude,
+          latitude,
           arrival,
           departure,
           nights,
           priceTotal,
           hotelApiId,
+          description,
+          rating,
+          type,
         },
       });
       return created;
@@ -106,12 +114,16 @@ export class HotelService {
     const {
       name,
       location,
-      coordinates,
+      longitude,
+      latitude,
       arrival,
       departure,
       nights,
       priceTotal,
       hotelApiId,
+      description,
+      rating,
+      type,
     } = updateHotelDto;
 
     try {
@@ -122,12 +134,16 @@ export class HotelService {
         data: {
           name,
           location,
-          coordinates,
+          longitude,
+          latitude,
           arrival,
           departure,
           nights,
           priceTotal,
           hotelApiId,
+          description,
+          rating,
+          type,
         },
       });
       return updated;
