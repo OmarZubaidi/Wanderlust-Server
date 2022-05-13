@@ -29,11 +29,15 @@ model Hotel {
   id            Int             @id @default(autoincrement())
   name          String
   location      String
-  coordinates   String
+  longitude     Float
+  latitude      Float
   arrival       DateTime
   departure     DateTime
   nights        Int
   priceTotal    String
+  description   String
+  rating        String
+  type          String
   hotelApiId    Int
   createdAt     DateTime        @default(now())
   UsersOnHotels UsersOnHotels[]
@@ -59,7 +63,8 @@ model Event {
   allDay      Boolean
   description String
   location    String
-  coordinates String
+  longitude   Float
+  latitude    Float
   price       String   @default("free")
   eventApiId  Int      @unique
   bookingLink String

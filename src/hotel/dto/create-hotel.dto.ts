@@ -5,8 +5,10 @@ export class CreateHotelDto {
   name: string;
   @IsString()
   location: string;
-  @IsString()
-  coordinates: string;
+  @IsNumber()
+  longitude: number;
+  @IsNumber()
+  latitude: number;
   @IsDate()
   arrival: Date;
   @IsDate()
@@ -17,4 +19,10 @@ export class CreateHotelDto {
   priceTotal: string;
   @IsNumber()
   hotelApiId: number;
+  @IsString()
+  description: string;
+  @IsString()
+  rating: string;
+  @IsString()
+  type: string;
 }
