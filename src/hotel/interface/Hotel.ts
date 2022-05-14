@@ -10,8 +10,8 @@ export interface Hotel {
   arrival: Date;
   departure: Date;
   nights: number;
-  priceTotal: string;
-  hotelApiId: number;
+  priceTotal: number;
+  hotelApiId: string;
   description: string;
   rating: string;
   type: string;

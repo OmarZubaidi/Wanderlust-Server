@@ -62,6 +62,8 @@ export class UserService {
               start: true,
               end: true,
               createdAt: true,
+              longitude: true,
+              latitude: true,
             },
           });
         }),

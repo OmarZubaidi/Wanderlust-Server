@@ -19,7 +19,7 @@ export class CreateEventDto {
   latitude: number;
   @IsString()
   coordinates: string;
-  @IsString()
+  @IsNumber()
   price: string;
   @IsNumber()
   eventApiId: number;

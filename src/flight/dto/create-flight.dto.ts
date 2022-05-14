@@ -11,7 +11,7 @@ import {
 export class CreateFlightDto {
   @IsString()
   lengthOfFlight: string;
-  @IsString()
+  @IsNumber()
   price: string;
   @IsString()
   departureCity: string;
