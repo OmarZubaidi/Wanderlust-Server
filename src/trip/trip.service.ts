@@ -18,7 +18,7 @@ export class TripService {
   constructor(private prisma: PrismaService) {}
 
   async create(createTripDto: CreateTripDto): Promise<Trip> {
-    const { start, end, destination } = createTripDto;
+    const { start, end, destination, longitude, latitude } = createTripDto;
 
     try {
       const created = await this.prisma.trip.create({
@@ -26,6 +26,8 @@ export class TripService {
           start,
           end,
           destination,
+          longitude,
+          latitude,
         },
       });
       return created;
@@ -194,7 +196,7 @@ export class TripService {
   }
 
   async update(id: string, updateTripDto: UpdateTripDto) {
-    const { start, end, destination } = updateTripDto;
+    const { start, end, destination, longitude, latitude } = updateTripDto;
 
     try {
       const updated = this.prisma.trip.update({
@@ -205,6 +207,8 @@ export class TripService {
           start,
           end,
           destination,
+          longitude,
+          latitude,
         },
       });
       return updated;

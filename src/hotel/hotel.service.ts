@@ -40,7 +40,7 @@ export class HotelService {
           arrival,
           departure,
           nights,
-          priceTotal,
+          priceTotal: +priceTotal,
           hotelApiId,
           description,
           rating,
@@ -91,7 +91,7 @@ export class HotelService {
     try {
       const hotel = await this.prisma.hotel.findMany({
         where: {
-          hotelApiId: +apiId,
+          hotelApiId: apiId,
         },
         include: {
           UsersOnHotels: {
@@ -139,7 +139,7 @@ export class HotelService {
           arrival,
           departure,
           nights,
-          priceTotal,
+          priceTotal: +priceTotal,
           hotelApiId,
           description,
           rating,

@@ -28,7 +28,7 @@ export class FlightService {
       const flight = await this.prisma.flight.create({
         data: {
           lengthOfFlight,
-          price,
+          price: +price,
           departureCity,
           arrivalCity,
           flightApiId,
@@ -123,7 +123,7 @@ export class FlightService {
         },
         data: {
           lengthOfFlight,
-          price,
+          price: +price,
           departureCity,
           arrivalCity,
           flightApiId,

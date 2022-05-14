@@ -34,11 +34,11 @@ model Hotel {
   arrival       DateTime
   departure     DateTime
   nights        Int
-  priceTotal    String
+  priceTotal    Float
   description   String
   rating        String
   type          String
-  hotelApiId    Int
+  hotelApiId    String
   createdAt     DateTime        @default(now())
   UsersOnHotels UsersOnHotels[]
 }
@@ -46,7 +46,7 @@ model Hotel {
 model Flight {
   id             Int              @id @default(autoincrement())
   lengthOfFlight String
-  price          String
+  price          Float
   departureCity  String
   arrivalCity    String
   flightApiId    Int
@@ -65,7 +65,7 @@ model Event {
   location    String
   longitude   Float
   latitude    Float
-  price       String   @default("free")
+  price       Float    @default(0)
   eventApiId  Int      @unique
   bookingLink String
   type        String
@@ -81,11 +81,13 @@ model Trip {
   start          DateTime
   end            DateTime
   destination    String
+  longitude      Float
+  latitude       Float
   Events         Event[]
   UsersOnTrips   UsersOnTrips[]
-  createdAt      DateTime         @default(now())
   UsersOnHotels  UsersOnHotels[]
   UsersOnFlights UsersOnFlights[]
+  createdAt      DateTime         @default(now())
 }
 
 model UsersOnTrips {

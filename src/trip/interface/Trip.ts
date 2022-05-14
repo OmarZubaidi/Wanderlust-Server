@@ -11,6 +11,8 @@ export interface Trip {
   start: Date;
   end: Date;
   destination: string;
+  longitude: number;
+  latitude: number;
   Hotels?: Hotel[];
   Flights?: Flight[];
   Events?: EventType[]; // ts didn't like Event as a name
