@@ -15,10 +15,10 @@ export class CreateHotelDto {
   departure: Date;
   @IsNumber()
   nights: number;
-  @IsString()
-  priceTotal: string;
   @IsNumber()
-  hotelApiId: number;
+  priceTotal: string;
+  @IsString()
+  hotelApiId: string;
   @IsString()
   description: string;
   @IsString()

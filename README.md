@@ -155,8 +155,8 @@ CreateHotelDto:
     "arrival": "2032-05-09T14:15:18.532Z",
     "departure": "2022-05-09T14:15:18.532Z",
     "nights": 5,
-    "priceTotal": "303 €",
-    "hotelApiId": 142,
+    "priceTotal": 303,
+    "hotelApiId": "142",
     "description": "Hotel is located near the beach",
     "type": "hotel",
     "rating": "5",
@@ -191,7 +191,8 @@ CreateFlightDto:
     "departureCity": "Barcelona",
     "arrivalCity": "Berlin",
     "lengthOfFlight": "2:30 h",
-    "price": "230 €",
+    "price": 230,
+    "flightApiId": 1234,
     "itineraries": [ // array of flight objects
         {
             "depAirport": "Barcelona",
@@ -235,7 +236,7 @@ CreateEventDto:
     "location": "barcelona",
     "longitude": 12378,
     "latitude": 1235678,
-    "price": "free",
+    "price": 0,
     "eventApiId": 12323,
     "bookingLink": "LINK",
     "type": "Activity",
@@ -270,7 +271,9 @@ CreateTripDto:
 {
     "start": "1970-01-01T00:00:00.000Z",
     "end": "1970-01-01T00:00:00.000Z",
-    "destination": "Senegal"
+    "destination": "Senegal",
+    "longitude": 123456,
+    "latitude": 123123
 }
 ```
 

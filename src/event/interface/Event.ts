@@ -7,7 +7,7 @@ export interface EventType {
   location: string;
   longitude: number;
   latitude: number;
-  price: string;
+  price: number;
   eventApiId: number;
   bookingLink: string;
   type: string;
