@@ -29,8 +29,8 @@ model Hotel {
   id            Int             @id @default(autoincrement())
   name          String
   location      String
-  longitude     Float
   latitude      Float
+  longitude     Float
   arrival       DateTime
   departure     DateTime
   nights        Int
@@ -63,8 +63,8 @@ model Event {
   allDay      Boolean
   description String
   location    String
-  longitude   Float
   latitude    Float
+  longitude   Float
   price       Float    @default(0)
   eventApiId  Int      @unique
   bookingLink String
@@ -81,8 +81,8 @@ model Trip {
   start          DateTime
   end            DateTime
   destination    String
-  longitude      Float
   latitude       Float
+  longitude      Float
   Events         Event[]
   UsersOnTrips   UsersOnTrips[]
   UsersOnHotels  UsersOnHotels[]

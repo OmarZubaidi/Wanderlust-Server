@@ -6,9 +6,9 @@ export class CreateHotelDto {
   @IsString()
   location: string;
   @IsNumber()
-  longitude: number;
-  @IsNumber()
   latitude: number;
+  @IsNumber()
+  longitude: number;
   @IsDate()
   arrival: Date;
   @IsDate()
