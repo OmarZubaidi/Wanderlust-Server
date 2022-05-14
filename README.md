@@ -150,8 +150,8 @@ CreateHotelDto:
 {
     "name": "Teds Plaza",
     "location": "Austria",
-    "longitude": 12378,
     "latitude": 1235678,
+    "longitude": 12378,
     "arrival": "2032-05-09T14:15:18.532Z",
     "departure": "2022-05-09T14:15:18.532Z",
     "nights": 5,
@@ -234,8 +234,8 @@ CreateEventDto:
     "allDay": true,
     "description": "test",
     "location": "barcelona",
-    "longitude": 12378,
     "latitude": 1235678,
+    "longitude": 12378,
     "price": 0,
     "eventApiId": 12323,
     "bookingLink": "LINK",
@@ -272,8 +272,8 @@ CreateTripDto:
     "start": "1970-01-01T00:00:00.000Z",
     "end": "1970-01-01T00:00:00.000Z",
     "destination": "Senegal",
-    "longitude": 123456,
-    "latitude": 123123
+    "latitude": 123123,
+    "longitude": 123456
 }
 ```
 
