@@ -388,8 +388,8 @@ CreateEventDto:
     price: number,
     eventApiId: number,
     bookingLink: string,    // URL
-    type: string,           // 'Activity',
-    pictures: string,       // 'reeeeee',
+    type: string,
+    pictures: string,
     rating: number,
     tripId: number,
 }
