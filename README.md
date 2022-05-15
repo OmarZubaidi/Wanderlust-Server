@@ -1,126 +1,276 @@
-## Description
+# Wanderlust Mobile App
 
-Nest.js backend for our Full Stack Travel Planning Application.
+<!-- TODO update logo when we decide on one -->
+<div align='center'>
+  <img
+    height='150'
+    src='./Logo.png'
+    alt='Logo'
+  />
+</div>
 
-## Installation
+<p align='center'>
+  The back-end for the <a href='https://github.com/OmarZubaidi/Wanderlust'>
+    Wanderlust
+  </a> project.
+</p>
 
-```bash
-$ npm install
+<hr>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ul>
+    <li>
+      <a href='#about-the-project'>
+        About the Project
+      </a>
+      <ul>
+        <li>
+          <a href='#built-with'>
+            Built With
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href='#getting-started'>
+        Getting Started
+      </a>
+      <ul>
+        <li>
+          <a href='#prerequisites'>
+            Prerequisites
+          </a>
+        </li>
+        <li>
+          <a href='#installation'>
+            Installation
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href='#routes'>
+        Routes
+      </a>
+      <ul>
+        <li>
+          <a href='#user'>
+            User
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#hotel'>
+            Hotel
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#flight'>
+            Flight
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#event'>
+            Event
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#trip'>
+            Trip
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#usersontrips-m---n-bridge'>
+            UsersOnTrips (m - n Bridge)
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#usersonhotels-m---n-bridge'>
+            UsersOnHotels (m - n Bridge)
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href='#usersonflights-m---n-bridge'>
+            UsersOnFlights (m - n Bridge)
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href='#contributing'>
+        Contributing
+      </a>
+    </li>
+    <li>
+      <a href='#contact'>
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href='#acknowledgements'>
+        Acknowledgements
+      </a>
+    </li>
+  </ul>
+</details>
+
+## About the Project
+
+This is where all the data necessary to make the project work is stored. This comprises users, flights, hotels, events, and much more.
+
+### Built With
+
+- [NodeJS](https://nodejs.org/en/)
+- [NestJS](https://nestjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Prisma](https://www.prisma.io/)
+- [Heroku](https://www.heroku.com/)
+
+## Getting Started
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+You need to have:
+
+- An [Auth0](https://auth0.com/) account, with a Single Page Application application (weird naming but okay).
+- Installed Node Version Manager
+- Installed the latest LTS version of Node
+
+```shell
+nvm install npm@lts -g
 ```
 
-## Running the app
+### Installation
 
-```bash
-# development
-$ npm run start
+- Clone the repo
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```shell
+git clone https://github.com/OmarZubaidi/Wanderlust-Server.git
 ```
 
-## Test
+- Install NPM packages
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```shell
+npm i
 ```
 
-## Setup Database
+- Create your `.env` file in the root folder as below.
 
-```bash
-# setup database
-npx prisma migrate dev --name init
-
-# open db web view
-npx prisma studio
 ```
-
-## Setup Environmental Variables
-
-```bash
-PORT = 1234
+PORT = YOUR_PORT_NUMBER
 # add your db username and password
-DATABASE_URL=postgresql://user:password@localhost:5432/wanderlust?schema=public
+DATABASE_URL=postgresql://YOUR_PSQL_USERNAME:YOUR_PSQL_PASSWORD@localhost:5432/wanderlust?schema=public
 
 # Auth0 Tenant Name and Region (us, eu...)
 AUTH0_ISSUER_URL=https://tenant-name.region.auth0.com/
 # Auth0 Custom Api Identifier 
-AUTH0_AUDIENCE=https://yourapiidentifier.com
+AUTH0_AUDIENCE=https://YOUR_API_IDENTIFIER.com
 ```
 
-## Setup Heroku
+- Set up the database
 
-```bash
+```shell
+npx prisma migrate dev --YOUR_DB_NAME init
+# Open DB web view
+npx prisma studio
+```
+
+- Run the app using
+
+```shell
+# Development
+npm run start
+# Watch mode
+npm run start:dev
+# Production mode
+npm run start:prod
+```
+
+- Set up Heroku
+
+```shell
 # Prisma and Heroku setup from scratch
 # https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-heroku
 
-# add remote heroku repo
-heroku git:remote -a your-app-name
-# push changes to heroku remote server
-# this will run npm start and npx prisma migrate deploy to set up the db
+# Add remote Heroku repo
+heroku git:remote -a YOUR_APP_NAME
+# Push changes to Heroku remote server.
+# This will run `npm start` and `npx prisma migrate deploy` to set up the DB.
 git push heroku main
-# to see live logs of the server run
+# To see live logs of the server
 heroku log --tail
 ```
 
-## API URL
+- Testing
 
-```bash
-https://api-wanderlust-dogs.herokuapp.com/
+```shell
+# Unit tests
+$ npm run test
+# End-to-end tests
+$ npm run test:e2e
+# Test coverage
+$ npm run test:cov
 ```
 
 ## Routes
 
-Following routes are available for the web and mobile application.
+The following routes are available for the web and mobile application.
 
 ### User
 
 Routes:
 
-```javascript
-// find all users
+```js
+// Find all users
 GET /users
-// find user by id
-// includes Hotels, Flights, Trips
+// Find user by id
+// Includes Hotels, Flights, Trips
 GET /users/:id
-// find user by email
+// Find user by email
 GET /users/email/:email
-// create new user -> look at CreateUserDto below for example
+// Create new user. Refer to 'CreateUserDto' for an example.
 POST /users
-// login mobile users with bcrypt password -> look at LoginMobileUserDto
+// Log in mobile users with bcrypt password. Refer to 'LoginMobileUserDto' for an example.
 POST /users/login/mobile
-// update user -> look at CreateUserDto for updatable properties
+// Update user. Refer to 'CreateUserDto' for updatable properties.
 PATCH /users/:id
-// delete user
+// Delete user
 DELETE /users/:id
 ```
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateUserDto:
 {
-    "email": "test@test.at",
-    "username": "test",
-    "sub": "2ssqwe123asd23",
-    "emailVerified": false,
-    "pictureUrl": "urltoimage",
-    "origin": "milano", // optional
-    "mobilePassword": "password" // optional
+    email: string,              // e.g. 'email@domain.tld',
+    username: string,
+    sub: string,
+    emailVerified: boolean,
+    pictureUrl: string,         // URL
+    origin?: string,            // Full city name
+    mobilePassword?: string,
 }
 LoginMobileUserDto:
 {
-    "email": "test@test.at",
-    "mobilePassword": "password"
+    email: string,              // e.g. 'email@domain.tld',
+    mobilePassword: string,
 }
 ```
 
@@ -128,38 +278,38 @@ LoginMobileUserDto:
 
 Routes:
 
-```javascript
-// find all hotels
+```js
+// Find all hotels
 GET /hotels
-// find hotel by id
+// Find hotel by id
 GET /hotels/:id
-// find hotel by apiId
+// Find hotel by apiId
 GET /hotels/api/:apiId
-// create new hotel-> look at CreateHotelDto below for example
+// Create new hotel. Refer to CreateHotelDto for an example.
 POST /hotels
-// update hotel -> look at CreateHotelDto for updatable properties
+// Update hotel. Refer to CreateHotelDto for updatable properties.
 PATCH /hotels/:id
-// delete hotel
+// Delete hotel
 DELETE /hotels/:id
 ```
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateHotelDto:
 {
-    "name": "Teds Plaza",
-    "location": "Austria",
-    "latitude": 1235678,
-    "longitude": 12378,
-    "arrival": "2032-05-09T14:15:18.532Z",
-    "departure": "2022-05-09T14:15:18.532Z",
-    "nights": 5,
-    "priceTotal": 303,
-    "hotelApiId": "142",
-    "description": "Hotel is located near the beach",
-    "type": "hotel",
-    "rating": "5",
+    name: string,
+    location: string,       // Full city name
+    latitude: number,
+    longitude: number,
+    arrival: string,        // '2022-05-19T19:00:00.000Z'
+    departure: string,      // '2022-05-19T19:00:00.000Z'
+    nights: number,
+    priceTotal: number,
+    hotelApiId: string,
+    description: string,
+    type: string,
+    rating: string,         // '5'
 }
 ```
 
@@ -167,16 +317,16 @@ CreateHotelDto:
 
 Routes:
 
-```javascript
-// find all flights
+```js
+// Find all flights
 GET /flights
-// find flight by id
+// Find flight by id
 GET /flights/:id
-// find flight by apiId
+// Find flight by apiId
 GET /flights/api/:apiId
-// create new flight -> look at CreateFlightDto below for example
+// Create new flight. Refer to CreateFlightDto for an example.
 POST /flights
-// update flights -> look at CreateFlightDto below for updatable properties
+// Update flights. Refer to CreateFlightDto for updatable properties.
 PATCH /flights/:id
 // Delete flight
 DELETE /flights/:id
@@ -184,25 +334,24 @@ DELETE /flights/:id
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateFlightDto:
 {
-
-    "departureCity": "Barcelona",
-    "arrivalCity": "Berlin",
-    "lengthOfFlight": "2:30 h",
-    "price": 230,
-    "flightApiId": 1234,
-    "itineraries": [ // array of flight objects
+    departureCity: string,          // Full city name
+    arrivalCity: string,            // Full city name
+    lengthOfFlight: string,         // '2:30 h'
+    price: number,
+    flightApiId: number,
+    itineraries: [
         {
-            "depAirport": "Barcelona",
-            "arrAirport": "Athen",
-            "depTerminal": "C", // optional
-            "arrTerminal": "G", // optional
-            "departure": "2022-05-12T13:06:11.358Z",
-            "arrival": "2022-05-12T13:06:11.358Z"
-        }
-    ]
+            depAirport: string,     // Full city name
+            arrAirport: string,     // Full city name
+            depTerminal: string,
+            arrTerminal: string,
+            departure: string,      // '2022-05-19T19:00:00.000Z'
+            arrival: string,        // '2022-05-19T19:00:00.000Z'
+        },
+    ];
 }:
 ```
 
@@ -210,14 +359,14 @@ CreateFlightDto:
 
 Routes:
 
-```javascript
-// find all events
+```js
+// Find all events
 GET /events
-// find event by id
+// Find event by id
 GET /events/:id
-// create new flight -> look at CreateEventDto below for example
+// Create new flight. Refer to CreateEventDto for an example.
 POST /events
-// update flights -> look at CreateEventDto below for updatable properties
+// Update flights. Refer to CreateEventDto for updatable properties.
 PATCH /events/:id
 // Delete event
 DELETE /events/:id
@@ -225,24 +374,24 @@ DELETE /events/:id
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateEventDto:
 {
-    "title": "Lorem ipsum dolor",
-    "start": "1970-01-01T00:00:00.000Z",
-    "end": "1970-01-01T00:00:00.000Z",
-    "allDay": true,
-    "description": "test",
-    "location": "barcelona",
-    "latitude": 1235678,
-    "longitude": 12378,
-    "price": 0,
-    "eventApiId": 12323,
-    "bookingLink": "LINK",
-    "type": "Activity",
-    "pictures": "reeeeee",
-    "rating": 3.2,
-    "tripId": 2
+    title: string,
+    start: string,          // '2022-05-19T19:00:00.000Z'
+    end: string,            // '2022-05-19T19:00:00.000Z'
+    allDay: boolean,
+    description: string,
+    location: string,       // Full city name
+    latitude: number,
+    longitude: number,
+    price: number,
+    eventApiId: number,
+    bookingLink: string,    // URL
+    type: string,           // 'Activity',
+    pictures: string,       // 'reeeeee',
+    rating: number,
+    tripId: number,
 }
 ```
 
@@ -250,15 +399,15 @@ CreateEventDto:
 
 Routes:
 
-```javascript
-// find all trips
+```js
+// Find all trips
 GET /trips
-// find trip by id,
-// includes Hotels, Flights, Events, and Users
+// Find trip by id,
+// Includes Hotels, Flights, Events, and Users
 GET /trips/:id
-// create new trip-> look at CreateUsersOnTripDto below for example
+// Create new trip. Refer to 'CreateUsersOnTripDto' for an example.
 POST /trips
-// update trip-> look at CreateUsersOnTripDto below for updatable properties
+// Update trip. Refer to 'CreateUsersOnTripDto' for updatable properties.
 PATCH /trips/:id
 // Delete trip
 DELETE /trips/:id
@@ -266,14 +415,14 @@ DELETE /trips/:id
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateTripDto:
 {
-    "start": "1970-01-01T00:00:00.000Z",
-    "end": "1970-01-01T00:00:00.000Z",
-    "destination": "Senegal",
-    "latitude": 123123,
-    "longitude": 123456
+    start: string,          // '2022-05-19T19:00:00.000Z'
+    end: string,            // '2022-05-19T19:00:00.000Z'
+    destination: string,    // Full city name
+    latitude: number,
+    longitude: number,
 }
 ```
 
@@ -281,16 +430,16 @@ CreateTripDto:
 
 Routes:
 
-```javascript
-// find all UsersOnTrips
+```js
+// Find all UsersOnTrips
 GET /users-on-trips
-// find UsersOnTrips by id
+// Find UsersOnTrips by id
 GET /users-on-trips/:id
-// create new UsersOnTrips -> look at CreateUsersOnTripDto below for example
+// Create new UsersOnTrips. Refer to CreateUsersOnTripDto for an example.
 POST /users-on-trips
-// create many trips with single tripId and multiple userIds
+// Create many trips with single tripId and multiple userIds
 POST /users-on-trips/many
-// update UsersOnTrips -> look at CreateUsersOnTripDto below for updatable properties
+// Update UsersOnTrips. Refer to CreateUsersOnTripDto for updatable properties.
 PATCH /users-on-trips/:id
 // Delete UsersOnTrips
 DELETE /users-on-trips/:id
@@ -298,21 +447,16 @@ DELETE /users-on-trips/:id
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateUsersOnTripDto:
 {
-    "userId": 10,
-    "tripId": 2
+    userId: number,
+    tripId: number,
 }
 CreateManyUsersOnTripDto:
 {
-    "tripId": 2,
-    "userIds": [
-        14,
-        10,
-        15,
-        22
-    ]
+    tripId: number,
+    userIds: number[],
 }
 ```
 
@@ -320,16 +464,16 @@ CreateManyUsersOnTripDto:
 
 Routes:
 
-```javascript
-// find all UsersOnHotels
+```js
+// Find all UsersOnHotels
 GET /users-on-hotels
-// find UsersOnHotels by id
+// Find UsersOnHotels by id
 GET /users-on-hotels/:id
-// create new UsersOnHotels -> look at CreateUsersOnHotelsDto below for example
+// Create new UsersOnHotels. Refer to CreateUsersOnHotelsDto for an example.
 POST /users-on-hotels
-// create many trips with single tripId and multiple userIds
+// Create many trips with single tripId and multiple userIds
 POST /users-on-hotels/many
-// update UsersOnHotels -> look at CreateUsersOnHotelsDto below for updatable properties
+// Update UsersOnHotels. Refer to CreateUsersOnHotelsDto for updatable properties.
 PATCH /users-on-hotels/:id
 // Delete UsersOnHotels
 DELETE /users-on-hotels/:id
@@ -337,12 +481,12 @@ DELETE /users-on-hotels/:id
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateUsersOnHotelsDto:
 {
-    "userId": 10,
-    "tripId": 2,
-    "hotelId": 2
+    userId: number,
+    tripId: number,
+    hotelId: number,
 }
 ```
 
@@ -350,16 +494,16 @@ CreateUsersOnHotelsDto:
 
 Routes:
 
-```javascript
-// find all UsersOnFlights
+```js
+// Find all UsersOnFlights
 GET /users-on-flights
-// find UsersOnFlights by id
+// Find UsersOnFlights by id
 GET /users-on-flights/:id
-// create new UsersOnFlights -> look at CreateUsersOnFlightsDto below for example
+// Create new UsersOnFlights. Refer to CreateUsersOnFlightsDto for an example.
 POST /users-on-flights
-// create many trips with single tripId and multiple userIds
+// Create many trips with single tripId and multiple userIds
 POST /users-on-flights/many
-// update UsersOnFlights -> look at CreateUsersOnFlightsDto below for updatable properties
+// Update UsersOnFlights. Refer to CreateUsersOnFlightsDto for updatable properties.
 PATCH /users-on-flights/:id
 // Delete UsersOnFlights
 DELETE /users-on-flights/:id
@@ -367,11 +511,33 @@ DELETE /users-on-flights/:id
 
 Data Transfer Objects:
 
-```json
+```ts
 CreateUsersOnHotelsDto:
 {
-    "userId": 10,
-    "tripId": 2,
-    "flightId": 2
+    userId: number,
+    tripId: number,
+    flightId: number,
 }
 ```
+
+## Contributing
+
+Contributions are welcome!
+
+If you have a suggestion that would make this better:
+
+- [Fork the project](https://github.com/OmarZubaidi/Wanderlust-Mobile/fork).
+- Create a branch using `git checkout -b feat-YOUR_FEATURE_NAME`.
+- Work on it and commit changes using `npx cz` (you'll get an interactive prompt for the commit message).
+- Push to your branch using `git push origin feat-YOUR_FEATURE_NAME`.
+- [Open a pull request](https://github.com/OmarZubaidi/Wanderlust-Mobile/compare).
+
+## Contact
+
+Creators: [Daniele Capano](https://github.com/daniele24134/), [Gabriele Zannini](https://github.com/CosmicZanna/), [Omar Zubaidi](https://github.com/OmarZubaidi/), and [Stefan Feldner](https://github.com/stefanfeldner/).
+
+Project Link: [on GitHub](https://github.com/OmarZubaidi/Wanderlust/).
+
+## Acknowledgements
+
+- [Auth0](https://auth0.com/)
