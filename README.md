@@ -1,4 +1,4 @@
-# Wanderlust Mobile App
+# Wanderlust Back End
 
 <!-- TODO update logo when we decide on one -->
 <div align='center'>
