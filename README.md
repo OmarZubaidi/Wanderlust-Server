@@ -526,11 +526,11 @@ Contributions are welcome!
 
 If you have a suggestion that would make this better:
 
-- [Fork the project](https://github.com/OmarZubaidi/Wanderlust-Mobile/fork).
+- [Fork the project](https://github.com/OmarZubaidi/Wanderlust-Server/fork).
 - Create a branch using `git checkout -b feat-YOUR_FEATURE_NAME`.
 - Work on it and commit changes using `npx cz` (you'll get an interactive prompt for the commit message).
 - Push to your branch using `git push origin feat-YOUR_FEATURE_NAME`.
-- [Open a pull request](https://github.com/OmarZubaidi/Wanderlust-Mobile/compare).
+- [Open a pull request](https://github.com/OmarZubaidi/Wanderlust-Server/compare).
 
 ## Contact
 
