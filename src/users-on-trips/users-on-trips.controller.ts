@@ -11,6 +11,7 @@ import { UsersOnTripsService } from './users-on-trips.service';
 import {
   CreateManyUsersOnTripDto,
   CreateUsersOnTripDto,
+  DeleteManyUsersOnTripDto,
 } from './dto/create-users-on-trip.dto';
 import { UpdateUsersOnTripDto } from './dto/update-users-on-trip.dto';
 
@@ -36,6 +37,15 @@ export class UsersOnTripsController {
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.usersOnTripsService.findById(id);
+  }
+
+  @Post('/delete')
+  deleteByTripAndUserId(
+    @Body() deleteManyUsersOnTripDto: DeleteManyUsersOnTripDto,
+  ) {
+    return this.usersOnTripsService.deleteByTripAndUserId(
+      deleteManyUsersOnTripDto,
+    );
   }
 
   @Patch(':id')
