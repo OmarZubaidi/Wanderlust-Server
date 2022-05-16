@@ -7,6 +7,7 @@ CREATE TABLE "User" (
     "emailVerified" BOOLEAN NOT NULL,
     "pictureUrl" TEXT NOT NULL,
     "origin" TEXT,
+    "mobilePassword" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -17,12 +18,16 @@ CREATE TABLE "Hotel" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "location" TEXT NOT NULL,
-    "coordinates" TEXT NOT NULL,
+    "latitude" DOUBLE PRECISION NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
     "arrival" TIMESTAMP(3) NOT NULL,
     "departure" TIMESTAMP(3) NOT NULL,
     "nights" INTEGER NOT NULL,
-    "priceTotal" TEXT NOT NULL,
-    "hotelApiId" INTEGER NOT NULL,
+    "priceTotal" DOUBLE PRECISION NOT NULL,
+    "description" TEXT NOT NULL,
+    "rating" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+    "hotelApiId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Hotel_pkey" PRIMARY KEY ("id")
@@ -31,15 +36,13 @@ CREATE TABLE "Hotel" (
 -- CreateTable
 CREATE TABLE "Flight" (
     "id" SERIAL NOT NULL,
-    "departure" TIMESTAMP(3) NOT NULL,
-    "arrival" TIMESTAMP(3) NOT NULL,
-    "gate" TEXT NOT NULL,
-    "depAirport" TEXT NOT NULL,
-    "arrAirport" TEXT NOT NULL,
     "lengthOfFlight" TEXT NOT NULL,
-    "price" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "departureCity" TEXT NOT NULL,
+    "arrivalCity" TEXT NOT NULL,
     "flightApiId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "itineraries" TEXT NOT NULL,
 
     CONSTRAINT "Flight_pkey" PRIMARY KEY ("id")
 );
@@ -53,8 +56,9 @@ CREATE TABLE "Event" (
     "allDay" BOOLEAN NOT NULL,
     "description" TEXT NOT NULL,
     "location" TEXT NOT NULL,
-    "coordinates" TEXT NOT NULL,
-    "price" TEXT NOT NULL DEFAULT E'free',
+    "latitude" DOUBLE PRECISION NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "eventApiId" INTEGER NOT NULL,
     "bookingLink" TEXT NOT NULL,
     "type" TEXT NOT NULL,
@@ -72,6 +76,8 @@ CREATE TABLE "Trip" (
     "start" TIMESTAMP(3) NOT NULL,
     "end" TIMESTAMP(3) NOT NULL,
     "destination" TEXT NOT NULL,
+    "latitude" DOUBLE PRECISION NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Trip_pkey" PRIMARY KEY ("id")
