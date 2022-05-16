@@ -1,16 +1,15 @@
 import {
   ForbiddenException,
-  HttpException,
-  HttpStatus,
   Injectable,
   NotAcceptableException,
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateManyUsersOnTripDto,
   CreateUsersOnTripDto,
+  DeleteManyUsersOnTripDto,
 } from './dto/create-users-on-trip.dto';
 import { UpdateUsersOnTripDto } from './dto/update-users-on-trip.dto';
 import { UsersOnTrips } from './interface/UsersOnTrips';
@@ -128,6 +127,23 @@ export class UsersOnTripsService {
       const deleted = this.prisma.usersOnTrips.delete({
         where: {
           id: +id,
+        },
+      });
+      return deleted;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteByTripAndUserId(
+    deleteManyUsersOnTripDto: DeleteManyUsersOnTripDto,
+  ): Promise<any> {
+    const { userId, tripId } = deleteManyUsersOnTripDto;
+    try {
+      const deleted = await this.prisma.usersOnTrips.deleteMany({
+        where: {
+          userId: userId,
+          tripId: tripId,
         },
       });
       return deleted;

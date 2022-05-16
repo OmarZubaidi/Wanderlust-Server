@@ -20,7 +20,7 @@ export class CreateEventDto {
   @IsString()
   coordinates: string;
   @IsNumber()
-  price: string;
+  price: number;
   @IsNumber()
   eventApiId: number;
   @IsString()
