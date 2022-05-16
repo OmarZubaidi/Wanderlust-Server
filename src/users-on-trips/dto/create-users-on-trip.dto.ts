@@ -13,3 +13,10 @@ export class CreateManyUsersOnTripDto {
   @IsArray()
   userIds: number[];
 }
+
+export class DeleteManyUsersOnTripDto {
+  @IsNumber()
+  tripId: number;
+  @IsNumber()
+  userId: number;
+}

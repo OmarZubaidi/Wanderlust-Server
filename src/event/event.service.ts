@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventType } from './interface/Event';
@@ -43,7 +43,7 @@ export class EventService {
           location,
           longitude,
           latitude,
-          price: +price,
+          price,
           eventApiId,
           bookingLink,
           type,
@@ -126,7 +126,7 @@ export class EventService {
           location,
           longitude,
           latitude,
-          price: +price,
+          price,
           eventApiId,
           bookingLink,
           type,
