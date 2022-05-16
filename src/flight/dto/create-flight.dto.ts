@@ -12,7 +12,7 @@ export class CreateFlightDto {
   @IsString()
   lengthOfFlight: string;
   @IsNumber()
-  price: string;
+  price: number;
   @IsString()
   departureCity: string;
   @IsString()

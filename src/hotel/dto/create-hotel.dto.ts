@@ -16,7 +16,7 @@ export class CreateHotelDto {
   @IsNumber()
   nights: number;
   @IsNumber()
-  priceTotal: string;
+  priceTotal: number;
   @IsString()
   hotelApiId: string;
   @IsString()
