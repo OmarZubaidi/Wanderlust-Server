@@ -1,10 +1,10 @@
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNumber, IsString } from 'class-validator';
 
 export class CreateTripDto {
-  @IsDate()
-  start: Date;
-  @IsDate()
-  end: Date;
+  @IsDateString()
+  start: string;
+  @IsDateString()
+  end: string;
   @IsString()
   destination: string;
   @IsNumber()

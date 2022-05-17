@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsDateString } from 'class-validator';
 
 export class CreateHotelDto {
   @IsString()
@@ -9,10 +9,10 @@ export class CreateHotelDto {
   latitude: number;
   @IsNumber()
   longitude: number;
-  @IsDate()
-  arrival: Date;
-  @IsDate()
-  departure: Date;
+  @IsDateString()
+  arrival: string;
+  @IsDateString()
+  departure: string;
   @IsNumber()
   nights: number;
   @IsNumber()
