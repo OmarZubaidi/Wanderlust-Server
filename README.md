@@ -173,14 +173,15 @@ npm i
 - Create your `.env` file in the root folder as below.
 
 ```
-PORT = YOUR_PORT_NUMBER
-# add your db username and password
-DATABASE_URL=postgresql://YOUR_PSQL_USERNAME:YOUR_PSQL_PASSWORD@localhost:5432/wanderlust?schema=public
+PORT=YOUR_PORT_NUMBER
 
-# Auth0 Tenant Name and Region (us, eu...)
+DATABASE_URL=postgresql://YOUR_PSQL_USERNAME:YOUR_PSQL_PASSWORD@localhost:5432/wanderlust?schema=public
+HDATABASE_URL=YOUR_HEROKU_CONNECTION_STRING
+
 AUTH0_ISSUER_URL=https://tenant-name.region.auth0.com/
-# Auth0 Custom Api Identifier 
 AUTH0_AUDIENCE=https://YOUR_API_IDENTIFIER.com
+
+BCRYPT_SALT=10
 ```
 
 - Set up the database

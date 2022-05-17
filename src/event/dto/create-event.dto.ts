@@ -1,12 +1,12 @@
-import { IsString, IsDate, IsNumber, IsBoolean } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsDateString } from 'class-validator';
 
 export class CreateEventDto {
   @IsString()
   title: string;
-  @IsDate()
-  start: Date;
-  @IsDate()
-  end: Date;
+  @IsDateString()
+  start: string;
+  @IsDateString()
+  end: string;
   @IsBoolean()
   allDay: boolean;
   @IsString()
@@ -17,8 +17,6 @@ export class CreateEventDto {
   longitude: number;
   @IsNumber()
   latitude: number;
-  @IsString()
-  coordinates: string;
   @IsNumber()
   price: number;
   @IsNumber()
